@@ -5,7 +5,7 @@ const Task = ({ task, tasks, setTasks }: any) => {
     const confirmed = confirm("Are you sure you want to delete this task?");
     if (confirmed) {
       try {
-        await fetch(`/api/task/edit/${task._id}`, {
+        await fetch(`/api/edit/${task._id}`, {
           method: "DELETE",
         });
         const filteredTasks = tasks.filter(

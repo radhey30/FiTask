@@ -17,7 +17,7 @@ const page = () => {
 
   useEffect(() => {
     async function setData() {
-      const res = await fetch(`/api/task/edit/${id}`);
+      const res = await fetch(`/api/edit/${id}`);
       const data = await res.json();
       setTask({
         title: data.title,
@@ -34,7 +34,7 @@ const page = () => {
     if (!id) return alert("Id not found");
 
     try {
-      const res = await fetch(`/api/task/edit/${id}`, {
+      const res = await fetch(`/api/edit/${id}`, {
         method: "PATCH",
         body: JSON.stringify({
           title: task.title,

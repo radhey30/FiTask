@@ -17,7 +17,7 @@ const page = () => {
     e.preventDefault();
     setSubmitting(true);
     try {
-      const res = await fetch("/api/task/new", {
+      const res = await fetch("/api/new", {
         method: "POST",
         body: JSON.stringify({
           title: task.title,

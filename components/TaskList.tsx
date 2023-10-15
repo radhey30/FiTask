@@ -9,7 +9,7 @@ const TaskList = () => {
   useEffect(() => {
     async function getTasks() {
       try {
-        const res = await fetch("/api/task/all", { method: "GET" });
+        const res = await fetch("/api/all", { method: "GET" });
         if (res.ok) {
           setTasks(await res.json());
         }
