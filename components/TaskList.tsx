@@ -11,7 +11,8 @@ const TaskList = () => {
       try {
         const res = await fetch("/api/all", { method: "GET" });
         if (res.ok) {
-          setTasks(await res.json());
+          const data = await res.json();
+          setTasks(data);
         }
       } catch (error) {
         console.log(error);
