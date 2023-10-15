@@ -17,7 +17,7 @@ const page = () => {
 
   useEffect(() => {
     async function setData() {
-      const res = await fetch(`/api/edit/${id}`);
+      const res = await fetch(`/api/edit/${id}`, {cache: 'no-store'});
       const data = await res.json();
       setTask({
         title: data.title,
@@ -41,6 +41,7 @@ const page = () => {
           desc: task.desc,
           date: task.date,
         }),
+        cache: 'no-store',
       });
       if (res.ok) {
         router.push("/");

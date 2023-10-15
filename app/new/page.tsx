@@ -24,6 +24,7 @@ const page = () => {
           desc: task.desc,
           date: task.date,
         }),
+        cache: 'no-store',
       });
       if (res.ok) {
         router.push("/");

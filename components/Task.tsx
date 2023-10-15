@@ -7,6 +7,7 @@ const Task = ({ task, tasks, setTasks }: any) => {
       try {
         await fetch(`/api/edit/${task._id}`, {
           method: "DELETE",
+          cache: 'no-store',
         });
         const filteredTasks = tasks.filter(
           (ctask: any) => ctask._id !== task._id
