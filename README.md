@@ -16,6 +16,7 @@ A task app built using Next.js and MongoDB that allows users to create, read, up
 * MongoDB
 * React
 * TypeScript
+* Tailwind CSS
 
 ## Getting started
 
