@@ -38,4 +38,4 @@ export const DELETE = async (request: any, { params }: any) => {
   }
 };
 
-export const revalidate = 1;
+export const revalidate = 0;

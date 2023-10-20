@@ -17,4 +17,4 @@ export const POST = async (req:any, res:any) => {
   }     
 };
 
-export const revalidate = 1;
+export const revalidate = 0;

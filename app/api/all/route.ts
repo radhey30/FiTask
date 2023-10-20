@@ -7,4 +7,4 @@ export const GET = async (req: any, res: any) => {
   return new Response(JSON.stringify(tasks), { status: 200 });
 };
 
-export const revalidate = 1;
+export const revalidate = 0;
