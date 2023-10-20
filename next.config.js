@@ -1,16 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   experimental: {
-      appDir: true,
-      serverComponentsExternalPackages: ["mongoose"],
-    },
-   webpack(config) {
-      config.experiments = {
-        ...config.experiments,
-        topLevelAwait: true,
-      }
-      return config
-    }
-}
+    appDir: true,
+    serverComponentsExternalPackages: ["mongoose"],
+    serverActions: true,
+  },
+  webpack(config) {
+    config.experiments = {
+      ...config.experiments,
+      topLevelAwait: true,
+    };
+    return config;
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

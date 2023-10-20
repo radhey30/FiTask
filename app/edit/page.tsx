@@ -2,10 +2,12 @@
 
 import { Form } from "@/components";
 import { useEffect, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { fetchTask, updateTask } from "@/utils/actions";
 
 const page = () => {
   const router = useRouter();
+  const path = usePathname()
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const [submitting, setSubmitting] = useState(false);
@@ -17,12 +19,11 @@ const page = () => {
 
   useEffect(() => {
     async function setData() {
-      const res = await fetch(`/api/edit/${id}`, {cache: 'no-store'});
-      const data = await res.json();
+      const task = await fetchTask(id);
       setTask({
-        title: data.title,
-        desc: data.description,
-        date: data.date,
+        title: task.title,
+        desc: task.description,
+        date: task.date,
       });
     }
     if (id) setData();
@@ -34,18 +35,14 @@ const page = () => {
     if (!id) return alert("Id not found");
 
     try {
-      const res = await fetch(`/api/edit/${id}`, {
-        method: "PATCH",
-        body: JSON.stringify({
-          title: task.title,
-          desc: task.desc,
-          date: task.date,
-        }),
-        cache: 'no-store',
+      await updateTask({
+        title: task.title,
+        description: task.desc,
+        date: task.date,
+        id: id,
+        path: path,
       });
-      if (res.ok) {
-        router.push("/");
-      }
+      router.push("/");
     } catch (error) {
       console.log(error);
     } finally {
@@ -53,9 +50,7 @@ const page = () => {
     }
   }
 
-  if(!task.title) return (
-    <div className="loading">Loading...</div>
-  )
+  if (!task.title) return <div className="loading">Loading...</div>;
 
   return (
     <main className="px-6 child:smooth">
