@@ -1,13 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Form } from "@/components";
-import { createTask } from "@/utils/actions";
 
 const page = () => {
   const router = useRouter();
-  const path = usePathname();
   const [task, setTask] = useState({
     title: "",
     desc: "",
@@ -19,13 +17,18 @@ const page = () => {
     e.preventDefault();
     setSubmitting(true);
     try {
-      await createTask({
-        title: task.title,
-        date: task.date,
-        description: task.desc,
-        path: path,
+      const res = await fetch("/api/new", {
+        method: "POST",
+        body: JSON.stringify({
+          title: task.title,
+          desc: task.desc,
+          date: task.date,
+        }),
+        cache: 'no-store',
       });
-      router.push("/");
+      if (res.ok) {
+        router.push("/");
+      }
     } catch (error) {
       console.log(error);
     } finally {
@@ -35,13 +38,7 @@ const page = () => {
 
   return (
     <main className="px-6 child:smooth">
-      <Form
-        type="create"
-        handleSubmit={handleSubmit}
-        task={task}
-        setTask={setTask}
-        submitting={submitting}
-      />
+      <Form type="create" handleSubmit={handleSubmit} task={task} setTask={setTask} submitting={submitting} />
     </main>
   );
 };
