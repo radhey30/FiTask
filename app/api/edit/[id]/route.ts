@@ -11,7 +11,8 @@ export const GET = async (request: any, { params }: any) => {
 };
 
 export const PATCH = async (request: any, { params }: any) => {
-  const { title, desc, date } = await request.json();
+  const { title, desc, date, checked } = await request.json();
+  
   try {
     await connectToDb();
     const existingTask = await Task.findById(params.id);
@@ -21,6 +22,7 @@ export const PATCH = async (request: any, { params }: any) => {
     existingTask.title = title;
     existingTask.description = desc;
     existingTask.date = date;
+    existingTask.checked = checked;
     await existingTask.save();
     return new Response(JSON.stringify(existingTask), { status: 200 });
   } catch (error) {

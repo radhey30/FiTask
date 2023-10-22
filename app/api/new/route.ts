@@ -9,6 +9,7 @@ export const POST = async (req:any, res:any) => {
       title: title,
       description: desc,
       date: date,
+      checked: false,
     });
     await newTask.save();
     return new Response(JSON.stringify(newTask), { status: 201 });

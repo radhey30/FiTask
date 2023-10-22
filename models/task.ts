@@ -13,6 +13,9 @@ const TaskSchema = new Schema({
     type: String,
     required: [true, "Date is required"],
   },
+  checked: {
+    type: Boolean,
+  },
 });
 
 const Task = models.Task || model("Task", TaskSchema);

@@ -13,6 +13,7 @@ const page = () => {
     title: "",
     desc: "",
     date: "",
+    checked: false,
   });
 
   useEffect(() => {
@@ -23,6 +24,7 @@ const page = () => {
         title: data.title,
         desc: data.description,
         date: data.date,
+        checked: data.checked,
       });
     }
     if (id) setData();
@@ -40,6 +42,7 @@ const page = () => {
           title: task.title,
           desc: task.desc,
           date: task.date,
+          checked: task.checked,
         }),
         cache: 'no-store',
       });

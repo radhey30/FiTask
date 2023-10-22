@@ -1,13 +1,13 @@
 import Link from "next/link";
 
-const Task = ({ task, tasks, setTasks }: any) => {
+const Task = ({ task, tasks, setTasks, setSortby }: any) => {
   async function handleDelete() {
     const confirmed = confirm("Are you sure you want to delete this task?");
     if (confirmed) {
       try {
         await fetch(`/api/edit/${task._id}`, {
           method: "DELETE",
-          cache: 'no-store',
+          cache: "no-store",
         });
         const filteredTasks = tasks.filter(
           (ctask: any) => ctask._id !== task._id
@@ -19,8 +19,32 @@ const Task = ({ task, tasks, setTasks }: any) => {
     }
   }
 
+  async function handleChecked() {
+    try {
+      await fetch(`/api/edit/${task._id}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          title: task.title,
+          desc: task.description,
+          date: task.date,
+          checked: !task.checked,
+        }),
+        cache: 'no-store',
+      });
+      const allTasks = await fetch("/api/all", { cache: 'no-store' });
+      if (allTasks.ok) {
+        const data = await allTasks.json();
+        setTasks(data);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setSortby("")
+    }
+  }
+
   return (
-    <div className="task">
+    <div className={`task ${task.checked ? 'checked' : ''}`}>
       <div className="flex flex-row items-center justify-between">
         <p className="text-[#000000b7] text-xl font-semibold">{task.title}</p>
         <p className="text-right text-sm font-medium">{task.date}</p>
@@ -31,6 +55,7 @@ const Task = ({ task, tasks, setTasks }: any) => {
         </p>
       </div>
       <div className="flex self-end gap-3 child:cursor-pointer">
+        <input type="checkbox" onClick={handleChecked} value="checked" className="w-4" checked={task.checked} />
         <Link href={`/edit?id=${task._id}`} title="Edit">
           ✏️
         </Link>
