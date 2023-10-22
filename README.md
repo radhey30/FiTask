@@ -6,9 +6,8 @@ A task app built using Next.js and MongoDB that allows users to create, read, up
 ## Features
 
 * Create, read, update, and delete tasks
-* Mark tasks as completed (in work)
-* Set due dates for tasks (in work)
-* Filter and sort tasks (in work)
+* Mark tasks as completed
+* Filter and sort tasks
 
 ## Technologies
 
