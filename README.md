@@ -5,6 +5,7 @@ A task app built using Next.js and MongoDB that allows users to create, read, up
 
 ## Features
 
+* User login with Google
 * Create, read, update, and delete tasks
 * Mark tasks as completed
 * Filter and sort tasks
