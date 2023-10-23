@@ -19,6 +19,9 @@ body {
   .checked {
     @apply bg-gray-200 opacity-70;
   }
+  .signin-text {
+    @apply text-2xl mx-auto bg-[#ffffff3c] w-fit py-2 px-5 rounded-xl mt-10;
+  }
 }
 
 @layer components {

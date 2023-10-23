@@ -1,5 +1,6 @@
 "use client";
 
+import { useSession } from "next-auth/react";
 import { Task } from ".";
 import { useEffect, useState } from "react";
 
@@ -11,9 +12,11 @@ const TaskList = ({
   setSortby: any;
 }) => {
   const [tasks, setTasks] = useState([]);
+  const { data: session } = useSession();
+
   async function getTasks() {
     try {
-      const res = await fetch("/api/all", { cache: "no-store" });
+      const res = await fetch(`/api/all`, { cache: "no-store" });
       if (res.ok) {
         const data = await res.json();
         setTasks(data);
@@ -22,9 +25,21 @@ const TaskList = ({
       console.log(error);
     }
   }
+  async function updateTasks() {
+    await getTasks();
+    setTasks((prev) => {
+      return prev.filter((task: any) => {
+        console.log(task.author);
+        return task.author == session?.user?.id
+      });
+    });
+  }
+  useEffect(() => {
+    updateTasks();
+  }, [session?.user?.id]);
 
   useEffect(() => {
-    getTasks();
+    updateTasks()
   }, []);
 
   useEffect(() => {
@@ -40,10 +55,14 @@ const TaskList = ({
       });
       setTasks([...sortedTasks]);
     } else {
-      getTasks();
+      // getTasks();
+      updateTasks();
     }
   }, [sortby]);
-  if (tasks.length === 0) return <div className="loading">Loading...</div>;
+  // if (tasks.length === 0) return <div className="loading">Loading...</div>;
+  if (!session?.user) {
+    return <div className="signin-text">SignIn to create tasks</div>;
+  }
   return (
     <div className="task-list child:border-2">
       {tasks.map((task, idx) => (
@@ -53,6 +72,7 @@ const TaskList = ({
           setTasks={setTasks}
           key={idx}
           setSortby={setSortby}
+          updateTasks={updateTasks}
         />
       ))}
     </div>

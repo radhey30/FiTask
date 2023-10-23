@@ -16,6 +16,10 @@ const TaskSchema = new Schema({
   checked: {
     type: Boolean,
   },
+  author: {
+    type: Schema.Types.ObjectId,
+    required: [true, "Author is required"],
+  },
 });
 
 const Task = models.Task || model("Task", TaskSchema);

@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const Task = ({ task, tasks, setTasks, setSortby }: any) => {
+const Task = ({ task, tasks, setTasks, setSortby, updateTasks }: any) => {
   async function handleDelete() {
     const confirmed = confirm("Are you sure you want to delete this task?");
     if (confirmed) {
@@ -31,11 +31,12 @@ const Task = ({ task, tasks, setTasks, setSortby }: any) => {
         }),
         cache: 'no-store',
       });
-      const allTasks = await fetch("/api/all", { cache: 'no-store' });
-      if (allTasks.ok) {
-        const data = await allTasks.json();
-        setTasks(data);
-      }
+      // const allTasks = await fetch("/api/all", { cache: 'no-store' });
+      // if (allTasks.ok) {
+      //   const data = await allTasks.json();
+      //   setTasks(data);
+      // }
+      updateTasks()
     } catch (error) {
       console.log(error);
     } finally {
@@ -55,7 +56,7 @@ const Task = ({ task, tasks, setTasks, setSortby }: any) => {
         </p>
       </div>
       <div className="flex self-end gap-3 child:cursor-pointer">
-        <input type="checkbox" onClick={handleChecked} value="checked" className="w-4" checked={task.checked} />
+        <input type="checkbox" onChange={handleChecked} value="checked" className="w-4" checked={task.checked} />
         <Link href={`/edit?id=${task._id}`} title="Edit">
           ✏️
         </Link>

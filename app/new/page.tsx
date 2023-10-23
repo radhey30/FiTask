@@ -3,9 +3,11 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Form } from "@/components";
+import { useSession } from "next-auth/react";
 
 const page = () => {
   const router = useRouter();
+  const {data: session} = useSession()
   const [task, setTask] = useState({
     title: "",
     desc: "",
@@ -23,6 +25,7 @@ const page = () => {
           title: task.title,
           desc: task.desc,
           date: task.date,
+          author: session?.user?.id,
         }),
         cache: 'no-store',
       });
@@ -34,6 +37,10 @@ const page = () => {
     } finally {
       setSubmitting(false);
     }
+  }
+
+  if(!session?.user) {
+    return <div className="sigin-text">Signin to create tasks.</div>
   }
 
   return (
