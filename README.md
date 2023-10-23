@@ -25,4 +25,4 @@ npm install
 npm run dev
 ```
 
-[Live Project](https://fitask-30deqalmh-radhey30.vercel.app/)
+[Live Project](https://fitask-mq9fc46ut-radhey30.vercel.app/)
