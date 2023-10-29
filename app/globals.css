@@ -9,7 +9,7 @@
 }
 
 body {
-  background-color: lightseagreen;
+  @apply bg-black;
 }
 
 @layer utilities {
@@ -17,7 +17,7 @@ body {
     @apply transition-all duration-100 ease-linear;
   }
   .checked {
-    @apply bg-gray-200 opacity-70;
+    @apply bg-neutral-500;
   }
   .signin-text {
     @apply text-2xl mx-auto bg-[#ffffff3c] w-fit py-2 px-5 rounded-xl mt-10;
@@ -25,26 +25,29 @@ body {
 }
 
 @layer components {
+  .navbar {
+    @apply relative px-6 py-8 flex flex-col gap-10 min-[530px]:flex-row min-[530px]:gap-0 justify-center items-center max-w-6xl mx-auto;
+  }
   .form-area {
-    @apply flex flex-col p-10 gap-8 max-w-4xl mx-auto mt-8 bg-[#0000000e] rounded-md shadow-lg;
+    @apply flex flex-col p-10 gap-8 max-w-4xl mx-auto mt-8 bg-[#65656535] rounded-md shadow-lg;
   }
   .label {
     @apply grid grid-cols-1 min-[480px]:grid-cols-[130px_1fr] gap-3;
   }
   .input {
-    @apply rounded-lg py-2 px-4 text-lg sm:text-xl outline-none font-sans hover:shadow-2xl focus:shadow-2xl;
+    @apply rounded-lg py-2 px-4 text-lg sm:text-xl outline-none font-sans hover:shadow-2xl hover:shadow-[#404040] focus:shadow-2xl;
   }
   .label-span {
-    @apply font-bold text-lg sm:text-xl min-[480px]:text-left text-center;
+    @apply font-bold text-lg sm:text-xl min-[480px]:text-left text-white text-center;
   }
   .button {
-    @apply bg-white rounded-full py-2 px-5 hover:bg-black hover:text-white hover:shadow-2xl smooth font-bold;
+    @apply bg-neutral-800 text-white rounded-full py-2 px-5 text-base hover:shadow-[0px_15px_30px_-6px_#303030,inset_-3px_-3px_10px_-10px_rgb(255,255,255)] smooth font-bold;
   }
   .task-list {
     @apply space-y-6 md:columns-2 py-6 gap-4 mt-10 font-sans;
   }
   .task {
-    @apply flex flex-col gap-1 p-4 bg-[lightseagreen] overflow-hidden my-2 rounded-sm;
+    @apply flex flex-col gap-1 p-4 bg-white overflow-hidden my-2 rounded-sm;
   }
   .loading {
     @apply grid place-items-center text-2xl font-bold mt-10;

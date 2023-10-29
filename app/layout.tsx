@@ -2,6 +2,13 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Navbar } from "@/components";
 import Provider from "@/components/Provider";
+import { Inter } from 'next/font/google'
+ 
+const inter = Inter({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: "FiTask",
@@ -15,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body>
+      <body className={inter.className}>
         <Provider>
           <Navbar />
           <hr />

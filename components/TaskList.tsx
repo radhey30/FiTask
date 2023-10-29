@@ -64,7 +64,7 @@ const TaskList = ({
     return <div className="signin-text">SignIn to create tasks</div>;
   }
   return (
-    <div className="task-list child:border-2">
+    <div className="task-list">
       {tasks.map((task, idx) => (
         <Task
           task={task}

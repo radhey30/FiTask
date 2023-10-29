@@ -31,11 +31,6 @@ const Task = ({ task, tasks, setTasks, setSortby, updateTasks }: any) => {
         }),
         cache: 'no-store',
       });
-      // const allTasks = await fetch("/api/all", { cache: 'no-store' });
-      // if (allTasks.ok) {
-      //   const data = await allTasks.json();
-      //   setTasks(data);
-      // }
       updateTasks()
     } catch (error) {
       console.log(error);
