@@ -21,7 +21,7 @@ A task app built using Next.js and MongoDB that allows users to create, read, up
 ## Getting started
 
 ```bash
-git clone https://github.com/your-username/task-app.git
+git clone https://github.com/radhey30/fitask.git
 npm install
 npm run dev
 ```
